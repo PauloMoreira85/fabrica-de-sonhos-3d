@@ -40,6 +40,18 @@ export const metadata: Metadata = {
     locale: "pt_BR",
     siteName: site.nome,
   },
+
+  /** Ícone e nome curto ao salvar na tela de início do celular. */
+  appleWebApp: {
+    title: "Sonhos 3D",
+    capable: true,
+    statusBarStyle: "default",
+  },
+
+  icons: {
+    icon: "/icon.png",
+    apple: "/apple-icon.png",
+  },
 };
 
 export const viewport: Viewport = {
