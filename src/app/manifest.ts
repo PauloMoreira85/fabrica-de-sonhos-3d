@@ -8,7 +8,7 @@ import type { MetadataRoute } from "next";
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "Fábrica de Sonhos 3D",
-    short_name: "Sonhos 3D",
+    short_name: "Fábrica de Sonhos 3D",
     description:
       "Peças exclusivas em impressão 3D: decoração, luminárias e presentes únicos.",
     start_url: "/",

@@ -43,7 +43,7 @@ export const metadata: Metadata = {
 
   /** Ícone e nome curto ao salvar na tela de início do celular. */
   appleWebApp: {
-    title: "Sonhos 3D",
+    title: "Fábrica de Sonhos 3D",
     capable: true,
     statusBarStyle: "default",
   },
