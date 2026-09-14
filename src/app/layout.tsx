@@ -41,7 +41,12 @@ export const metadata: Metadata = {
     siteName: site.nome,
   },
 
-  /** Ícone e nome curto ao salvar na tela de início do celular. */
+  /**
+   * Nome exibido sob o ícone na tela de início.
+   * Cada sistema lê de um lugar: Android usa application-name (abaixo)
+   * e o short_name do manifest; iPhone usa apple-mobile-web-app-title.
+   */
+  applicationName: "Fábrica de Sonhos 3D",
   appleWebApp: {
     title: "Fábrica de Sonhos 3D",
     capable: true,
