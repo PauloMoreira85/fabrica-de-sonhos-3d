@@ -1,0 +1,114 @@
+@import "tailwindcss";
+
+/**
+ * PALETA — Fábrica de Sonhos 3D
+ * Clara e acolhedora: coral quente + lilás sonhador sobre creme.
+ * Para mudar as cores do site inteiro, altere os valores abaixo.
+ */
+@theme {
+  /* Cor principal — coral quente */
+  --color-coral-50: #fff5f2;
+  --color-coral-100: #ffe6de;
+  --color-coral-200: #ffcbb9;
+  --color-coral-300: #ffa688;
+  --color-coral-400: #ff7a52;
+  --color-coral-500: #f65a2c;
+  --color-coral-600: #e33f14;
+  --color-coral-700: #bd2f0f;
+  --color-coral-800: #962914;
+  --color-coral-900: #7a2714;
+
+  /* Cor secundária — lilás sonhador */
+  --color-lilas-50: #f7f5ff;
+  --color-lilas-100: #efebff;
+  --color-lilas-200: #e0d9ff;
+  --color-lilas-300: #c8bbff;
+  --color-lilas-400: #a992fb;
+  --color-lilas-500: #8d6bf4;
+  --color-lilas-600: #7a4de8;
+  --color-lilas-700: #683bcc;
+  --color-lilas-800: #5732a6;
+  --color-lilas-900: #492c85;
+
+  /* Neutros quentes — fundo creme, texto grafite */
+  --color-creme-50: #fdfcfa;
+  --color-creme-100: #faf7f2;
+  --color-creme-200: #f3ede4;
+  --color-creme-300: #e8dfd2;
+  --color-creme-400: #d4c7b5;
+  --color-creme-500: #b5a894;
+  --color-creme-600: #8b7f6d;
+  --color-creme-700: #6b6155;
+  --color-creme-800: #4a433a;
+  --color-creme-900: #2e2a25;
+
+  --font-display: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-creme-50);
+    color: var(--color-creme-900);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Respeita quem prefere menos animação. */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer utilities {
+  /* Malha de pontos suave usada como textura de fundo. */
+  .bg-pontilhado {
+    background-image: radial-gradient(
+      var(--color-creme-300) 1px,
+      transparent 1px
+    );
+    background-size: 22px 22px;
+  }
+
+  .animar-entrada {
+    animation: entrada 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  @keyframes entrada {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes flutuar {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .animar-flutuar {
+    animation: flutuar 6s ease-in-out infinite;
+  }
+}
