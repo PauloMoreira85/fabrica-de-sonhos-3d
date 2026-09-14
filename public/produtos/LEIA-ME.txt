@@ -1,0 +1,6 @@
+Coloque aqui as fotos dos produtos.
+
+Depois, em src/config/produtos.ts, aponte para a foto assim:
+  imagem: "/produtos/nome-da-foto.jpg"
+
+Dica: use fotos quadradas (ex.: 800x800) para o catálogo ficar alinhado.
