@@ -1,23 +1,25 @@
 # Fábrica de Sonhos 3D
 
-Site institucional e catálogo de impressão 3D personalizada, com conversão
-via WhatsApp (sem carrinho e sem pagamento online).
+Site institucional e catálogo de peças em impressão 3D, com contato via
+WhatsApp.
+
+🌐 **No ar:** <https://fabricadesonhos3d.com.br>
 
 ---
 
 ## ⚠️ Primeiro passo: colocar o WhatsApp de verdade
 
-O site inteiro leva o cliente para o WhatsApp, então **esse é o ajuste mais
-importante**. Sem ele, nenhum botão funciona.
+O site inteiro leva o cliente para o WhatsApp, então **esse é o ajuste
+mais importante**. Sem ele, nenhum botão funciona.
 
-Abra o arquivo `src/config/site.ts` e troque a linha do `whatsapp`:
+Abra `src/config/site.ts` e troque a linha do `whatsapp`:
 
 ```ts
 whatsapp: "5500000000000",   // ← troque por: 55 + DDD + número
 ```
 
-O número vai **sem espaço, sem traço e sem parênteses**, começando com `55`
-(código do Brasil).
+O número vai **sem espaço, sem traço e sem parênteses**, começando
+com `55` (código do Brasil).
 
 | Número real      | Como escrever    |
 | ---------------- | ---------------- |
@@ -28,64 +30,60 @@ No mesmo arquivo também dá para mudar e-mail, Instagram, cidade e prazo.
 
 ---
 
+## Como cadastrar produtos
+
+**Os produtos NÃO ficam neste projeto.** Eles vêm do banco de dados,
+cadastrados pelo **PDV** (projeto `Fábrica de Sonhos PDV`).
+
+No PDV:
+
+- **Produtos** → cadastra a peça, preço, foto, estoque e a seção
+  - marque **"Mostrar no site"** para ela aparecer no catálogo
+  - marque **"Destacar na página inicial"** para ela entrar na vitrine da home
+- **Seções** → cria os grupos (Luminárias, Decoração, Presentes…),
+  que viram os filtros do catálogo
+
+O site atualiza sozinho em até **5 minutos**. Não precisa mexer em
+código nem publicar de novo.
+
+### Fotos dos produtos
+
+No campo "Link da foto", cole o endereço de uma imagem já hospedada
+(Google Drive com link público, Imgur, Instagram etc.).
+
+Dicas: use imagens **quadradas** (ex.: 800 × 800) e comprima em
+<https://squoosh.app> para o site carregar rápido. Produto sem foto
+mostra um espaço reservado elegante — o site não quebra.
+
+---
+
 ## Rodando o site no seu computador
 
-Só precisa fazer isso uma vez, para instalar:
+Primeira vez:
 
 ```bash
 npm install
 ```
 
-Depois, sempre que quiser ver o site:
+Sempre que quiser ver o site:
 
 ```bash
 npm run dev
 ```
 
-Abra o endereço http://localhost:3000 no navegador. Enquanto esse comando
-estiver rodando, qualquer alteração aparece na hora.
-
-Para parar, aperte `Ctrl + C` no terminal.
+Abra http://localhost:3000. Para parar, aperte `Ctrl + C`.
 
 ---
 
-## Como adicionar ou mudar produtos
+## Páginas
 
-Todos os produtos ficam em `src/config/produtos.ts`.
+| Endereço | Arquivo | O que tem |
+| --- | --- | --- |
+| `/` | `src/app/page.tsx` | Destaque, como comprar, peças em destaque, materiais, diferenciais |
+| `/catalogo` | `src/app/catalogo/page.tsx` | Catálogo completo, com filtro por seção |
 
-Para **adicionar** um produto, copie um bloco inteiro (de `{` até `},`),
-cole logo abaixo e mude os dados:
-
-```ts
-{
-  id: "nome-curto-sem-espacos",     // precisa ser diferente dos outros
-  nome: "Luminária Estrela",
-  descricao: "Uma descrição curta e gostosa de ler.",
-  preco: "R$ 99,90",                // ou "Sob consulta"
-  categoria: "Luminárias",          // veja as categorias abaixo
-  imagem: "/produtos/estrela.jpg",  // ou "" se ainda não tiver foto
-  destaque: true,                   // true = aparece na página inicial
-},
-```
-
-**Categorias disponíveis:** `Decoração`, `Presentes`, `Personalizados`,
-`Luminárias`, `Utilidades`.
-
-Se precisar de uma categoria nova, adicione-a nas duas listas no topo do
-arquivo (`Categoria` e `categorias`).
-
-### Colocando as fotos
-
-1. Salve a foto na pasta `public/produtos/`
-2. No produto, escreva o caminho: `imagem: "/produtos/nome-da-foto.jpg"`
-
-Dicas para as fotos ficarem bonitas:
-
-- Use imagens **quadradas** (ex.: 800 × 800 pixels)
-- Fundo claro e liso valoriza a peça
-- Comprima em <https://squoosh.app> para o site carregar rápido
-
-Produto sem foto mostra um espaço reservado elegante — o site não quebra.
+Os textos fixos (passos, materiais, diferenciais) ficam em listas no
+começo de cada arquivo, fáceis de achar e editar.
 
 ---
 
@@ -102,40 +100,16 @@ Trocando esses valores, o site inteiro muda junto.
 
 ---
 
-## Estrutura das páginas
+## Publicando alterações
 
-| Endereço     | Arquivo                      | O que tem |
-| ------------ | ---------------------------- | --------- |
-| `/`          | `src/app/page.tsx`           | Home: destaque, como funciona, produtos, materiais, diferenciais |
-| `/catalogo`  | `src/app/catalogo/page.tsx`  | Catálogo completo com filtro por categoria |
-| `/orcamento` | `src/app/orcamento/page.tsx` | Formulário de encomenda + perguntas frequentes |
+O projeto está ligado ao GitHub e à Vercel. Qualquer alteração enviada
+vai ao ar sozinha em cerca de 1 minuto:
 
-Textos dessas páginas (passos, materiais, diferenciais, FAQ) ficam em listas
-no começo de cada arquivo, fáceis de achar e editar.
-
----
-
-## Como funciona o formulário de orçamento
-
-Não existe servidor nem banco de dados. Ao enviar, o site **monta a mensagem
-e abre o WhatsApp já preenchido** — o cliente revisa e manda.
-
-Vantagens: custo zero de hospedagem, nada para manter, nenhuma mensagem se
-perde, e a conversa já começa no lugar certo.
-
----
-
-## Colocando o site no ar
-
-A forma mais simples e gratuita é pela Vercel:
-
-1. Crie uma conta em <https://vercel.com>
-2. Suba este projeto para o GitHub
-3. Na Vercel, clique em **Add New → Project** e escolha o repositório
-4. Clique em **Deploy** — nenhuma configuração extra é necessária
-
-O site sai no ar em poucos minutos. Depois é só apontar o domínio próprio
-(ex.: `fabricadesonhos3d.com.br`) nas configurações do projeto.
+```bash
+git add -A
+git commit -m "descrição da mudança"
+git push
+```
 
 Para conferir antes se está tudo certo:
 
@@ -145,17 +119,15 @@ npm run build
 
 ---
 
-## Antes de divulgar — lista de conferência
+## Segurança
 
-- [ ] WhatsApp real configurado em `src/config/site.ts`
-- [ ] E-mail, Instagram e cidade atualizados
-- [ ] Produtos reais cadastrados, com preços corretos
-- [ ] Fotos das peças adicionadas
-- [ ] Testar os botões de WhatsApp no celular
-- [ ] Revisar os textos da home e do FAQ
+O site usa a chave **pública** do Supabase, e as regras do banco
+permitem a ela apenas **ler produtos e seções publicados**. Pedidos,
+clientes, custos e estoque ficam inacessíveis pelo site — só pelo PDV,
+com login.
 
 ---
 
 ## Tecnologias
 
-Next.js 16 · React 19 · TypeScript · Tailwind CSS 4
+Next.js 16 · React 19 · TypeScript · Tailwind CSS 4 · Supabase

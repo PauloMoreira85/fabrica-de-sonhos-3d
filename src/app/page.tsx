@@ -1,28 +1,31 @@
 import Link from "next/link";
 import { site, linkWhatsapp, mensagens } from "@/config/site";
-import { produtosDestaque } from "@/config/produtos";
+import { buscarDestaques } from "@/lib/catalogo";
 import CartaoProduto from "@/components/CartaoProduto";
+
+/** Revalida a cada 5 minutos: o que for cadastrado no PDV aparece aqui. */
+export const revalidate = 300;
 
 const passos = [
   {
     numero: "01",
-    titulo: "Conte sua ideia",
+    titulo: "Escolha sua peça",
     texto:
-      "Mande uma foto, um desenho, um arquivo 3D ou só descreva o que você imaginou. A gente entende o resto.",
-    icone: "💭",
+      "Navegue pelo catálogo e veja as peças disponíveis, todas já prontinhas para enviar.",
+    icone: "🔎",
   },
   {
     numero: "02",
-    titulo: "Criamos o projeto",
+    titulo: "Chame no WhatsApp",
     texto:
-      "Desenhamos a peça, escolhemos o material ideal e enviamos o orçamento sem compromisso.",
-    icone: "✏️",
+      "Clique em 'Tenho interesse' e fale direto com a gente. Tiramos suas dúvidas na hora.",
+    icone: "💬",
   },
   {
     numero: "03",
-    titulo: "Imprimimos e entregamos",
+    titulo: "Receba em casa",
     texto:
-      "Sua peça é produzida com capricho, revisada uma a uma e enviada para todo o Brasil.",
+      "Combinamos o pagamento e a entrega. Enviamos para todo o Brasil com embalagem reforçada.",
     icone: "📦",
   },
 ];
@@ -49,24 +52,24 @@ const materiais = [
 
 const diferenciais = [
   {
-    icone: "🎨",
-    titulo: "Totalmente personalizado",
-    texto: "Nome, cor, tamanho, formato — do jeitinho que você sonhou.",
+    icone: "✨",
+    titulo: "Peças exclusivas",
+    texto: "Criações pensadas com carinho, que você não encontra em qualquer lugar.",
+  },
+  {
+    icone: "📦",
+    titulo: "Pronta entrega",
+    texto: "O que está no catálogo já está produzido e sai rapidinho.",
   },
   {
     icone: "💝",
-    titulo: "Feito com carinho",
-    texto: "Cada peça é conferida à mão antes de sair daqui.",
-  },
-  {
-    icone: "⚡",
-    titulo: "Entrega rápida",
-    texto: `Prazo médio de ${site.prazoMedio} para a maioria das peças.`,
+    titulo: "Feito à mão",
+    texto: "Cada peça é revisada uma a uma antes de sair daqui.",
   },
   {
     icone: "💬",
     titulo: "Atendimento humano",
-    texto: "Você fala direto com quem vai produzir a sua peça.",
+    texto: "Você fala direto com quem produziu a sua peça.",
   },
   {
     icone: "🌱",
@@ -80,7 +83,9 @@ const diferenciais = [
   },
 ];
 
-export default function Home() {
+export default async function Home() {
+  const destaques = await buscarDestaques();
+
   return (
     <>
       {/* ── Hero ─────────────────────────────────────────── */}
@@ -97,7 +102,7 @@ export default function Home() {
 
         <div className="relative mx-auto max-w-6xl px-5 text-center">
           <span className="animar-entrada inline-flex items-center gap-2 rounded-full border border-coral-200 bg-white/80 px-4 py-2 text-xs font-bold tracking-wide text-coral-700 uppercase shadow-sm backdrop-blur-sm">
-            ✦ Impressão 3D personalizada
+            ✦ Peças em impressão 3D
           </span>
 
           <h1 className="animar-entrada font-display mx-auto mt-7 max-w-4xl text-4xl leading-[1.08] font-extrabold tracking-tight text-creme-900 sm:text-6xl lg:text-7xl">
@@ -108,32 +113,32 @@ export default function Home() {
           </h1>
 
           <p className="animar-entrada mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-creme-700 sm:text-xl">
-            Peças únicas, presentes inesquecíveis e projetos sob encomenda.
-            Tudo criado especialmente para você, com capricho em cada detalhe.
+            Peças decorativas, luminárias e presentes criados com carinho —
+            prontinhos para chegar até você.
           </p>
 
           <div className="animar-entrada mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
-            <a
-              href={linkWhatsapp(mensagens.orcamento)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full rounded-full bg-coral-500 px-8 py-4 text-base font-bold text-white shadow-xl shadow-coral-500/25 transition-all hover:-translate-y-0.5 hover:bg-coral-600 hover:shadow-2xl hover:shadow-coral-500/35 sm:w-auto"
-            >
-              Quero um orçamento
-            </a>
             <Link
               href="/catalogo"
-              className="w-full rounded-full border-2 border-creme-300 bg-white/70 px-8 py-4 text-base font-bold text-creme-800 backdrop-blur-sm transition-all hover:-translate-y-0.5 hover:border-coral-300 hover:text-coral-700 sm:w-auto"
+              className="w-full rounded-full bg-coral-500 px-8 py-4 text-base font-bold text-white shadow-xl shadow-coral-500/25 transition-all hover:-translate-y-0.5 hover:bg-coral-600 hover:shadow-2xl hover:shadow-coral-500/35 sm:w-auto"
             >
               Ver o catálogo
             </Link>
+            <a
+              href={linkWhatsapp(mensagens.comprar)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full rounded-full border-2 border-creme-300 bg-white/70 px-8 py-4 text-base font-bold text-creme-800 backdrop-blur-sm transition-all hover:-translate-y-0.5 hover:border-coral-300 hover:text-coral-700 sm:w-auto"
+            >
+              Falar no WhatsApp
+            </a>
           </div>
 
           <dl className="mx-auto mt-16 grid max-w-2xl grid-cols-3 gap-4">
             {[
-              { valor: "0,05mm", rotulo: "de precisão" },
-              { valor: site.prazoMedio, rotulo: "prazo médio" },
-              { valor: "100%", rotulo: "personalizado" },
+              { valor: "Pronta", rotulo: "entrega" },
+              { valor: site.prazoMedio, rotulo: "para chegar" },
+              { valor: "Brasil", rotulo: "todo" },
             ].map((item) => (
               <div key={item.rotulo} className="text-center">
                 <dt className="font-display text-2xl font-extrabold text-coral-600 sm:text-3xl">
@@ -153,10 +158,10 @@ export default function Home() {
         <div className="mx-auto max-w-6xl px-5">
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="font-display text-3xl font-extrabold tracking-tight text-creme-900 sm:text-4xl">
-              Como funciona
+              Como comprar
             </h2>
             <p className="mt-4 text-lg text-creme-700">
-              Três passos simples entre a sua ideia e a peça na sua mão.
+              Três passos simples até a peça chegar na sua casa.
             </p>
           </div>
 
@@ -183,46 +188,45 @@ export default function Home() {
           </ol>
 
           <div className="mt-12 text-center">
-            <a
-              href={linkWhatsapp(mensagens.orcamento)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block rounded-full bg-[#25D366] px-8 py-4 text-base font-bold text-white shadow-lg shadow-[#25D366]/25 transition-all hover:-translate-y-0.5 hover:shadow-xl"
+            <Link
+              href="/catalogo"
+              className="inline-block rounded-full bg-coral-500 px-8 py-4 text-base font-bold text-white shadow-lg shadow-coral-500/25 transition-all hover:-translate-y-0.5 hover:bg-coral-600"
             >
-              Começar pelo WhatsApp
-            </a>
+              Ver todas as peças
+            </Link>
           </div>
         </div>
       </section>
 
       {/* ── Destaques do catálogo ────────────────────────── */}
-      <section className="bg-creme-100 py-20 sm:py-28">
-        <div className="mx-auto max-w-6xl px-5">
-          <div className="flex flex-col items-start justify-between gap-5 sm:flex-row sm:items-end">
-            <div className="max-w-xl">
-              <h2 className="font-display text-3xl font-extrabold tracking-tight text-creme-900 sm:text-4xl">
-                Feitos com amor
-              </h2>
-              <p className="mt-4 text-lg text-creme-700">
-                Alguns dos nossos queridinhos — e todos podem ser
-                personalizados do seu jeito.
-              </p>
+      {destaques.length > 0 && (
+        <section className="bg-creme-100 py-20 sm:py-28">
+          <div className="mx-auto max-w-6xl px-5">
+            <div className="flex flex-col items-start justify-between gap-5 sm:flex-row sm:items-end">
+              <div className="max-w-xl">
+                <h2 className="font-display text-3xl font-extrabold tracking-tight text-creme-900 sm:text-4xl">
+                  Feitos com amor
+                </h2>
+                <p className="mt-4 text-lg text-creme-700">
+                  Algumas das nossas peças favoritas, prontinhas para enviar.
+                </p>
+              </div>
+              <Link
+                href="/catalogo"
+                className="shrink-0 rounded-full border-2 border-creme-300 bg-white px-6 py-3 text-sm font-bold text-creme-800 transition-all hover:border-coral-300 hover:text-coral-700"
+              >
+                Ver tudo →
+              </Link>
             </div>
-            <Link
-              href="/catalogo"
-              className="shrink-0 rounded-full border-2 border-creme-300 bg-white px-6 py-3 text-sm font-bold text-creme-800 transition-all hover:border-coral-300 hover:text-coral-700"
-            >
-              Ver tudo →
-            </Link>
-          </div>
 
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {produtosDestaque.map((produto) => (
-              <CartaoProduto key={produto.id} produto={produto} />
-            ))}
+            <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {destaques.map((produto) => (
+                <CartaoProduto key={produto.id} produto={produto} />
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* ── Materiais ────────────────────────────────────── */}
       <section className="bg-white py-20 sm:py-28">
@@ -232,8 +236,7 @@ export default function Home() {
               Nossos materiais
             </h2>
             <p className="mt-4 text-lg text-creme-700">
-              Escolhemos o material certo para cada peça — e explicamos tudo
-              antes de imprimir.
+              Cada peça é feita com o material mais adequado para ela.
             </p>
           </div>
 
@@ -295,14 +298,14 @@ export default function Home() {
         />
         <div className="relative mx-auto max-w-3xl px-5 text-center">
           <h2 className="font-display text-3xl font-extrabold tracking-tight text-white sm:text-5xl">
-            Vamos criar algo único?
+            Encontrou algo que gostou?
           </h2>
           <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-white/90">
-            Conte sua ideia pra gente. O orçamento é gratuito e sem
-            compromisso — e adoramos um desafio novo.
+            Chama a gente no WhatsApp que a gente te conta tudo sobre a peça
+            e combina a entrega.
           </p>
           <a
-            href={linkWhatsapp(mensagens.orcamento)}
+            href={linkWhatsapp(mensagens.comprar)}
             target="_blank"
             rel="noopener noreferrer"
             className="mt-9 inline-block rounded-full bg-white px-9 py-4 text-base font-bold text-coral-600 shadow-xl transition-all hover:-translate-y-0.5 hover:shadow-2xl"

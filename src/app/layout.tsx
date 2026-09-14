@@ -27,8 +27,8 @@ export const metadata: Metadata = {
   description: site.descricao,
   keywords: [
     "impressão 3D",
-    "peças personalizadas",
-    "presentes personalizados",
+    "peças em 3D",
+    "presentes criativos",
     "luminária 3D",
     "decoração 3D",
     site.cidade,

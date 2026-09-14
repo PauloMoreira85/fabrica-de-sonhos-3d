@@ -8,7 +8,6 @@ import { site, linkWhatsapp, mensagens } from "@/config/site";
 const navegacao = [
   { href: "/", rotulo: "Início" },
   { href: "/catalogo", rotulo: "Catálogo" },
-  { href: "/orcamento", rotulo: "Encomendas" },
 ];
 
 export default function Cabecalho() {
@@ -59,12 +58,12 @@ export default function Cabecalho() {
             </Link>
           ))}
           <a
-            href={linkWhatsapp(mensagens.orcamento)}
+            href={linkWhatsapp(mensagens.comprar)}
             target="_blank"
             rel="noopener noreferrer"
             className="rounded-full bg-coral-500 px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-coral-500/25 transition-all hover:-translate-y-0.5 hover:bg-coral-600 hover:shadow-xl hover:shadow-coral-500/30"
           >
-            Pedir orçamento
+            Fale conosco
           </a>
         </nav>
 
@@ -114,13 +113,13 @@ export default function Cabecalho() {
             </Link>
           ))}
           <a
-            href={linkWhatsapp(mensagens.orcamento)}
+            href={linkWhatsapp(mensagens.comprar)}
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => setMenuAberto(false)}
             className="mt-2 rounded-full bg-coral-500 px-5 py-3 text-center text-base font-bold text-white shadow-lg shadow-coral-500/25"
           >
-            Pedir orçamento
+            Fale conosco
           </a>
         </nav>
       </div>

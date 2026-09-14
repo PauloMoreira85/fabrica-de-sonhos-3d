@@ -10,7 +10,7 @@ export const site = {
   nome: "Fábrica de Sonhos 3D",
   slogan: "Damos forma aos seus sonhos",
   descricao:
-    "Impressão 3D personalizada: peças exclusivas, presentes únicos e projetos sob encomenda feitos com carinho para você.",
+    "Peças exclusivas em impressão 3D: decoração, luminárias e presentes únicos, feitos com carinho e prontos para enviar.",
 
   /**
    * ⚠️ TROQUE AQUI PELO WHATSAPP REAL
@@ -36,7 +36,7 @@ export function linkWhatsapp(mensagem: string): string {
 /** Mensagens pré-preenchidas usadas nos botões do site. */
 export const mensagens = {
   geral: `Olá! Vim pelo site da ${site.nome} e gostaria de mais informações.`,
-  orcamento: `Olá! Gostaria de solicitar um orçamento personalizado.`,
+  comprar: `Olá! Vim pelo site e gostaria de saber mais sobre as peças disponíveis.`,
   produto: (nome: string) =>
-    `Olá! Tenho interesse no produto "${nome}" que vi no site. Poderia me passar mais detalhes?`,
+    `Olá! Tenho interesse no produto "${nome}" que vi no site. Ele está disponível?`,
 } as const;

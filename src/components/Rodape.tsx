@@ -39,14 +39,6 @@ export default function Rodape() {
                 Catálogo
               </Link>
             </li>
-            <li>
-              <Link
-                href="/orcamento"
-                className="transition-colors hover:text-coral-600"
-              >
-                Encomendas
-              </Link>
-            </li>
           </ul>
         </div>
 
@@ -91,18 +83,18 @@ export default function Rodape() {
 
         <div>
           <h3 className="font-display text-sm font-bold tracking-wide text-creme-900 uppercase">
-            Tem uma ideia?
+            Fale com a gente
           </h3>
           <p className="mt-4 text-sm leading-relaxed text-creme-700">
-            Conte pra gente o que você imaginou. O orçamento é gratuito.
+            Dúvidas sobre alguma peça? Chama no WhatsApp.
           </p>
           <a
-            href={linkWhatsapp(mensagens.orcamento)}
+            href={linkWhatsapp(mensagens.comprar)}
             target="_blank"
             rel="noopener noreferrer"
             className="mt-4 inline-block rounded-full bg-coral-500 px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-coral-600"
           >
-            Pedir orçamento
+            Fale conosco
           </a>
         </div>
       </div>
