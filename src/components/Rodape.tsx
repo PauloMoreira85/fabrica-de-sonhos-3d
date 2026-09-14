@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { site, linkWhatsapp, mensagens } from "@/config/site";
 
 export default function Rodape() {
@@ -8,16 +9,13 @@ export default function Rodape() {
     <footer className="border-t border-creme-200 bg-creme-100">
       <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:grid-cols-2 lg:grid-cols-4">
         <div className="sm:col-span-2 lg:col-span-1">
-          <div className="flex items-center gap-2.5">
-            <span className="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-coral-400 to-lilas-500 text-lg text-white">
-              ✦
-            </span>
-            <span className="font-display text-[17px] leading-tight font-bold text-creme-900">
-              Fábrica de
-              <br />
-              <span className="text-coral-600">Sonhos 3D</span>
-            </span>
-          </div>
+          <Image
+            src="/logo.png"
+            alt={site.nome}
+            width={382}
+            height={170}
+            className="h-14 w-auto"
+          />
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-creme-700">
             {site.descricao}
           </p>

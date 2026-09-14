@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { site, linkWhatsapp, mensagens } from "@/config/site";
 
@@ -32,17 +33,18 @@ export default function Cabecalho() {
       <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
         <Link
           href="/"
-          className="flex items-center gap-2.5"
+          className="flex items-center"
           onClick={() => setMenuAberto(false)}
+          aria-label={`${site.nome} — página inicial`}
         >
-          <span className="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-coral-400 to-lilas-500 text-lg shadow-md shadow-coral-500/20">
-            ✦
-          </span>
-          <span className="font-display text-[17px] leading-tight font-bold tracking-tight text-creme-900">
-            Fábrica de
-            <br />
-            <span className="text-coral-600">Sonhos 3D</span>
-          </span>
+          <Image
+            src="/logo.png"
+            alt={site.nome}
+            width={382}
+            height={170}
+            priority
+            className="h-12 w-auto sm:h-14"
+          />
         </Link>
 
         {/* Navegação — telas médias e maiores */}
